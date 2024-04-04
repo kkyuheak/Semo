@@ -14,10 +14,10 @@ export interface ICollection {
   thumb_image: string;
 }
 
-export const getCollection = async () => {
+export const getArtList = async (item: string) => {
   try {
     const response = await axios.get(
-      `http://openapi.seoul.go.kr:8088/${process.env.API_KEY}/json/SemaPsgudInfoKorInfo/1/20/`
+      `http://openapi.seoul.go.kr:8088/${process.env.API_KEY}/json/${item}`
     );
 
     return response;

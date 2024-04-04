@@ -2,8 +2,8 @@ import Image from "next/image";
 import styles from "../page.module.css";
 import { FaAnglesDown } from "react-icons/fa6";
 import VisitCard from "@/components/visitCard/VisitCard";
-import CollectionSec from "@/components/mainCollectionSec/CollectionSec";
-import Intro from "@/components/mainIntro/Intro";
+import CollectionSec from "@/components/homeCollectionSec/CollectionSec";
+import Intro from "@/components/homeIntro/Intro";
 
 export default function Home() {
   return (
@@ -59,6 +59,8 @@ export default function Home() {
       <section>
         <CollectionSec />
       </section>
+
+      {/*  */}
     </div>
   );
 }

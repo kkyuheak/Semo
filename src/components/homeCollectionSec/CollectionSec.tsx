@@ -1,10 +1,10 @@
 import Image from "next/image";
 import styles from "./collectionSec.module.css";
-import { ICollection, getCollection } from "@/actions/getCollection";
+import { ICollection, getArtList } from "@/actions/getArtList";
 
 export default async function CollectionSec() {
   // 소장품가져오기
-  const collection = await getCollection();
+  const collection = await getArtList("SemaPsgudInfoKorInfo/1/20/");
   const collectionItem: ICollection[] =
     collection?.data.SemaPsgudInfoKorInfo.row;
 
