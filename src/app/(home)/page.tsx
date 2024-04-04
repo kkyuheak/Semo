@@ -1,25 +1,11 @@
-"use client";
-
 import Image from "next/image";
 import styles from "../page.module.css";
 import { FaAnglesDown } from "react-icons/fa6";
-import { useEffect, useState } from "react";
 import VisitCard from "@/components/visitCard/VisitCard";
+import CollectionSec from "@/components/mainCollectionSec/CollectionSec";
+import Intro from "@/components/mainIntro/Intro";
 
 export default function Home() {
-  const [scroll, setScroll] = useState(false);
-
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 350) {
-        setScroll(true);
-      } else {
-        setScroll(false);
-      }
-      console.log(window.scrollY);
-    });
-  }, []);
-
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -36,39 +22,7 @@ export default function Home() {
 
       {/* 도서관 소개 */}
       <section className={styles.intro} id="intro">
-        <div className={styles.introTitle}>
-          <span
-            className={
-              scroll ? styles.introUp : `${styles.introUp} ${styles.introDown}`
-            }
-          >
-            서울시립도서관은
-          </span>
-          <hr />
-          <span
-            className={
-              scroll ? styles.introUp : `${styles.introUp} ${styles.introDown}`
-            }
-          >
-            시대와 미술의 변화에 부응하고
-          </span>
-          <hr />
-          <span
-            className={
-              scroll ? styles.introUp : `${styles.introUp} ${styles.introDown}`
-            }
-          >
-            서로를 채우며 성장해 가는
-          </span>
-          <hr />
-          <span
-            className={
-              scroll ? styles.introUp : `${styles.introUp} ${styles.introDown}`
-            }
-          >
-            네트워크 미술관입니다.
-          </span>
-        </div>
+        <Intro />
       </section>
 
       {/* VisitCard */}
@@ -99,6 +53,11 @@ export default function Home() {
             number={4}
           />
         </div>
+      </section>
+
+      {/* 소장품 소개 */}
+      <section>
+        <CollectionSec />
       </section>
     </div>
   );

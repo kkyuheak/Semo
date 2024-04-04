@@ -21,7 +21,7 @@
 }
 
 .boxNumber2 {
-  top: 150px;
+  top: 120px;
   right: 0px;
   animation: 4s 0.5s infinite bounce;
 }
@@ -33,7 +33,7 @@
 }
 
 .boxNumber4 {
-  bottom: -30px;
+  bottom: 30px;
   right: 90px;
   animation: 4s 1.5s infinite bounce;
 }

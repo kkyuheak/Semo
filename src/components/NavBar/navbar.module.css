@@ -8,6 +8,14 @@
   z-index: 5;
   background-color: #fff;
   border-right: 1px solid #cdcdcd;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s;
+}
+
+.showNav {
+  opacity: 1;
+  visibility: visible;
 }
 
 .navLogo {
@@ -27,23 +35,22 @@
   list-style: none;
   font-size: 25px;
   font-weight: 700;
-  /* color: #a8a8a8; */
 }
 
 .navList > li {
   margin-top: 20px;
-  transition: all 0.4s;
   cursor: pointer;
 }
 
-.navList a {
+.navScroll {
+  transition: all 0.4s;
   color: #a8a8a8;
 }
 
-.navLink {
+.navScroll:hover {
   color: #000;
 }
 
-.mouseOn {
+.navLink {
   color: #000;
 }

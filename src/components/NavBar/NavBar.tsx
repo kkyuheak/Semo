@@ -1,16 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./navbar.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function NavBar() {
-  const [mouseIntro, setMouseIntro] = useState(false);
-  const [mouseVisit, setMouseVisit] = useState(false);
+  const [showNav, setShowNav] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 1200) {
+        setShowNav(true);
+      } else {
+        setShowNav(false);
+      }
+    });
+  }, []);
 
   return (
-    <div className={styles.container}>
+    <div
+      className={
+        showNav
+          ? `${styles.container} ${styles.showNav}`
+          : `${styles.container}`
+      }
+    >
       {/* 로고 */}
       <div className={styles.navLogo}>
         <Image
@@ -24,28 +39,13 @@ export default function NavBar() {
       {/* navItem */}
       <div className={styles.navItem}>
         <ul className={styles.navList}>
-          <li
-            onMouseOver={() => {
-              setMouseIntro(true);
-            }}
-            onMouseLeave={() => {
-              setMouseIntro(false);
-            }}
-            className={mouseIntro ? `${styles.mouseOn}` : ""}
-          >
-            <Link href={"#intro"}>소개</Link>
+          <li>
+            <Link href={"#intro"} className={styles.navScroll}>
+              소개
+            </Link>
           </li>
           <li>
-            <Link
-              href={"#visit"}
-              onMouseOver={() => {
-                setMouseVisit(true);
-              }}
-              onMouseLeave={() => {
-                setMouseVisit(false);
-              }}
-              className={mouseVisit ? `${styles.mouseOn}` : ""}
-            >
+            <Link href={"#visit"} className={styles.navScroll}>
               방문하기
             </Link>
           </li>

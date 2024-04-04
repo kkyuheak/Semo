@@ -18,26 +18,9 @@ export default function VisitCard({
   number,
 }: IVisitCardProps) {
   const boxNumber = `boxNumber${number}`;
-  const [scrollUp, setScrollUp] = useState(false);
-
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 950) {
-        setScrollUp(true);
-      } else {
-        setScrollUp(false);
-      }
-    });
-  }, []);
 
   return (
-    <div
-      className={
-        scrollUp
-          ? `${styles.box} ${styles[boxNumber]}`
-          : `${styles.box} ${styles[boxNumber]} ${styles.showUp}`
-      }
-    >
+    <div className={`${styles.box} ${styles[boxNumber]}`}>
       <div className={styles.boxImage}>
         <Image src={imageSrc} alt="title" width={320} height={400} />
       </div>
