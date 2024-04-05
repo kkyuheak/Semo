@@ -1,0 +1,9 @@
+.container {
+  width: calc(100% - 320px);
+  transform: translateX(320px);
+  padding: 5px 20px;
+}
+
+.container > h1 {
+  margin-bottom: 30px;
+}

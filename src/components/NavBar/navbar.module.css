@@ -54,3 +54,9 @@
 .navLink {
   color: #000;
 }
+
+@media screen and (max-width: 980px) {
+  .container {
+    display: none;
+  }
+}

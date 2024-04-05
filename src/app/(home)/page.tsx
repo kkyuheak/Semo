@@ -4,6 +4,7 @@ import { FaAnglesDown } from "react-icons/fa6";
 import VisitCard from "@/components/visitCard/VisitCard";
 import CollectionSec from "@/components/homeCollectionSec/CollectionSec";
 import Intro from "@/components/homeIntro/Intro";
+import HomeExhibit from "@/components/homeExhibit/homeExhibit";
 
 export default function Home() {
   return (
@@ -60,7 +61,10 @@ export default function Home() {
         <CollectionSec />
       </section>
 
-      {/*  */}
+      {/* 전시 */}
+      <div>
+        <HomeExhibit />
+      </div>
     </div>
   );
 }

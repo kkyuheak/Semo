@@ -33,7 +33,7 @@
   font-size: 18px;
 }
 
-@media screen and (min-width: 1500px) {
+@media screen and (min-width: 1600px) {
   .randomImg > img {
     width: 1000px;
     height: 600px;
