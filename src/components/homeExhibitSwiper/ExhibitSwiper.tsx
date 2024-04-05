@@ -3,12 +3,11 @@
 import { IExhibit } from "@/actions/getArtList";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import styles from "./exhibitSwiper.module.css";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import styles from "./exhibitSwiper.module.css";
 
 interface IExhibitSwiperProps {
   exhibit: IExhibit[];
@@ -20,7 +19,10 @@ export default function ExhibitSwiper({ exhibit }: IExhibitSwiperProps) {
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         slidesPerView={2}
-        pagination={{ clickable: true }}
+        pagination={{
+          clickable: true,
+          bulletActiveClass: `${styles.swiperBullet_active}`,
+        }}
         navigation
         loop={true}
         autoplay={true}

@@ -1,3 +1,7 @@
+:root {
+  --swiper-theme-color: #000;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -26,3 +30,8 @@ html {
 /* hr {
   border: 1px solid black;
 } */
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #000 !important;
+}
