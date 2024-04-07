@@ -20,26 +20,24 @@ export default function Footer() {
         </div>
 
         {/* 개인정보 */}
-        <div className={styles.footerPrivacy}>
-          <ul>
-            <li>
-              <Link href={""}>개인정보처리방침</Link>
-            </li>
-            <li>
-              <Link href={""}>접근성 안내</Link>
-            </li>
-            <li>
-              <Link href={""}>이메일무단수집거부</Link>
-            </li>
-            <li>
-              <Link href={""}>함께한 사람들</Link>
-            </li>
-          </ul>
-        </div>
+        <ul className={styles.footerPrivacy}>
+          <li>
+            <Link href={""}>개인정보처리방침</Link>
+          </li>
+          <li>
+            <Link href={""}>접근성 안내</Link>
+          </li>
+          <li>
+            <Link href={""}>이메일무단수집거부</Link>
+          </li>
+          <li>
+            <Link href={""}>함께한 사람들</Link>
+          </li>
+        </ul>
 
         {/* github repository */}
         <div className={styles.footerGitLink}>
-          <Link href={"https://github.com/kkyuheak/Semo"}>git repository</Link>
+          <Link href={"https://github.com/kkyuheak/Semo"}>Git Repository</Link>
         </div>
       </div>
     </footer>

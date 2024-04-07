@@ -25,9 +25,31 @@
   cursor: pointer;
 }
 
-.footerInfo {
+.footerInfo > p {
+  font-size: 18px;
+  margin-bottom: 8px;
 }
 
 .footerInfo > p:last-child {
   font-weight: bold;
+}
+
+.footerPrivacy {
+  list-style: none;
+}
+
+.footerPrivacy > li {
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.footerPrivacy > li:first-child {
+  font-weight: 600;
+}
+
+.footerGitLink > a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: 18px;
+  font-weight: 600;
 }
