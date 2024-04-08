@@ -1,3 +1,7 @@
-export default function LoginPage() {
-  return <div>asd</div>;
-}
+import React from "react";
+
+const LoginPage: React.FC = () => {
+  return <div>LoginPage</div>;
+};
+
+export default LoginPage;

@@ -11,7 +11,7 @@ export default async function CollectionSec() {
   // 소장품 랜덤값
   const randomCol =
     collectionItem[Math.floor(Math.random() * collectionItem.length)];
-  console.log("randomCol: ", randomCol);
+  // console.log("randomCol: ", randomCol);
   return (
     <div className={styles.container}>
       <h1 className={styles.collectionTitle}>

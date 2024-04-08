@@ -5,6 +5,7 @@ import VisitCard from "@/components/visitCard/VisitCard";
 import CollectionSec from "@/components/homeCollectionSec/CollectionSec";
 import Intro from "@/components/homeIntro/Intro";
 import HomeExhibit from "@/components/homeExhibit/homeExhibit";
+import NavBar from "@/components/NavBar/NavBar";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
         <Intro />
       </section>
 
+      {/* <NavBar /> */}
       {/* VisitCard */}
       <section className={styles.visitSection} id="visit">
         <div className={styles.cardWrapper}>

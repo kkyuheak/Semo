@@ -1,10 +1,18 @@
+"use client";
 import Link from "next/link";
 import styles from "./footer.module.css";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+  console.log("pathname:", pathname);
   return (
-    <footer className={styles.container}>
+    <footer
+      className={
+        pathname === "/" ? `${styles.homeContainer}` : `${styles.container}`
+      }
+    >
       <div className={styles.footerWrapper}>
         {/* SNS 아이콘 */}
         <div className={styles.footerIcon}>

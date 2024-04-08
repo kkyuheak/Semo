@@ -7,7 +7,7 @@ export default async function HomeExhibit() {
 
   const exhibit: IExhibit[] = getExhibit?.data.ListExhibitionOfSeoulMOAInfo.row;
 
-  console.log(exhibit);
+  // console.log(exhibit);
   return (
     <div className={styles.container}>
       <h1>전시</h1>

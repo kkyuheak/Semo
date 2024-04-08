@@ -1,3 +1,7 @@
 export default function CollectionPage() {
-  return <div></div>;
+  return (
+    <div>
+      <h1>asd</h1>
+    </div>
+  );
 }
