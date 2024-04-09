@@ -54,12 +54,6 @@
   margin: auto;
 }
 
-@media screen and (min-width: 1300px) {
-  .cardWrapper {
-    transform: translateX(150px);
-  }
-}
-
 @media screen and (max-width: 1050px) {
   .intro {
     font-size: 30px;

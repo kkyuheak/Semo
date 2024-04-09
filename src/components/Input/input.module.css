@@ -1,0 +1,19 @@
+.inputEl > label {
+  margin-bottom: 3px;
+  font-size: 16px;
+}
+
+.inputEl > input {
+  width: 100%;
+  height: 55px;
+  font-size: 17px;
+  margin-bottom: 10px;
+  outline: none;
+  border: 1px solid #37bcff;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.inputEl > input::placeholder {
+  font-size: 14px;
+}
