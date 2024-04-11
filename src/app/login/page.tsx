@@ -3,11 +3,16 @@ import React from "react";
 import styles from "./login.module.css";
 import Link from "next/link";
 import Input from "@/components/Input/Input";
+import { signIn, useSession } from "next-auth/react";
 
 const LoginPage: React.FC = () => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+  };
+
   return (
     <div className={styles.container}>
-      <form className={styles.loginWrapper}>
+      <form className={styles.loginWrapper} onSubmit={handleSubmit}>
         <Input
           label="아이디"
           placeholder="아이디를 입력해주세요"
@@ -23,7 +28,14 @@ const LoginPage: React.FC = () => {
           id="password"
         />
 
-        <button className={styles.loginBtn}>로그인</button>
+        <button
+          className={styles.loginBtn}
+          onClick={() => {
+            signIn("github");
+          }}
+        >
+          로그인
+        </button>
       </form>
 
       <div>
