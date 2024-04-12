@@ -5,8 +5,12 @@ import styles from "./navbar.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 
 export default function NavBar() {
+  // 로그인세션 여부
+  const { data: session } = useSession();
+
   const [whiteNav, setWhiteNav] = useState<boolean>(false);
 
   const router = useRouter();
@@ -91,9 +95,19 @@ export default function NavBar() {
         {/* topNav Items */}
 
         <ul className={styles.topNavList}>
-          <li>
-            <Link href={"/login"}>로그인</Link>
-          </li>
+          {session ? (
+            <li
+              onClick={() => {
+                signOut();
+              }}
+            >
+              로그아웃
+            </li>
+          ) : (
+            <li>
+              <Link href={"/login"}>로그인</Link>
+            </li>
+          )}
           <li>
             <Link href={""}>전시와 교육</Link>
           </li>

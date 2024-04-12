@@ -5,7 +5,10 @@ import Link from "next/link";
 import Input from "@/components/Input/Input";
 import { signIn, useSession } from "next-auth/react";
 
-const LoginPage: React.FC = () => {
+const LoginPage = () => {
+  const { data: session } = useSession();
+  console.log(session);
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
   };
@@ -31,7 +34,7 @@ const LoginPage: React.FC = () => {
         <button
           className={styles.loginBtn}
           onClick={() => {
-            signIn("github");
+            signIn();
           }}
         >
           로그인
