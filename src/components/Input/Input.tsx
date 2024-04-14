@@ -8,7 +8,8 @@ interface IInputProps {
   id: string;
   name: string;
   value?: string;
-  onChange?: void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: boolean;
 }
 
 const Input = ({
@@ -18,6 +19,8 @@ const Input = ({
   id,
   name,
   value,
+  onChange,
+  error,
 }: IInputProps) => {
   return (
     <div className={styles.inputEl}>
@@ -28,6 +31,8 @@ const Input = ({
         id={id}
         name={name}
         value={value}
+        onChange={onChange}
+        className={error ? `${styles.errorInput}` : ``}
       />
     </div>
   );

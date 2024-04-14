@@ -7,10 +7,14 @@ import Link from "next/link";
 import axios from "axios";
 
 const Register = () => {
-  const [id, setId] = useState("kevin");
-  const [password, setPassword] = useState("1234");
-  const [email, setEmail] = useState("asd@asd.cs");
-  const [nickname, setNickName] = useState("asd");
+  const [id, setId] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [checkPassword, setCheckPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [nickname, setNickName] = useState<string>("");
+
+  // 비밀번호 검사 통과
+  const [pass, setPass] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,6 +44,12 @@ const Register = () => {
       setPassword(value);
     } else if (name === "nickname") {
       setNickName(value);
+    } else if (name === "checkPassword") {
+      setCheckPassword(value);
+    }
+
+    if (password === checkPassword) {
+      setPass(true);
     }
   };
 
@@ -62,6 +72,7 @@ const Register = () => {
           name="nickname"
           id="nickname"
           value={nickname}
+          onChange={handleChange}
         />
 
         <Input
@@ -70,6 +81,7 @@ const Register = () => {
           name="id"
           id="id"
           value={id}
+          onChange={handleChange}
         />
 
         <Input
@@ -79,6 +91,17 @@ const Register = () => {
           name="password"
           id="password"
           value={password}
+          onChange={handleChange}
+        />
+
+        <Input
+          label="비밀번호 확인"
+          placeholder="비밀번호를 한번 더 입력해주세요"
+          type="password"
+          name="checkPassword"
+          id="checkPassword"
+          value={checkPassword}
+          onChange={handleChange}
         />
 
         <button className={styles.regiBtn}>회원가입</button>
