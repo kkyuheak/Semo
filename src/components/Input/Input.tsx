@@ -32,7 +32,9 @@ const Input = ({
         name={name}
         value={value}
         onChange={onChange}
-        className={error ? `${styles.errorInput}` : ``}
+        className={
+          error ? `${styles.input} ${styles.errorInput}` : ` ${styles.input}`
+        }
       />
     </div>
   );

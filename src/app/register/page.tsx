@@ -1,7 +1,7 @@
 "use client";
 
 import Input from "@/components/Input/Input";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./register.module.css";
 import Link from "next/link";
 import axios from "axios";
@@ -14,7 +14,7 @@ const Register = () => {
   const [nickname, setNickName] = useState<string>("");
 
   // 비밀번호 검사 통과
-  const [pass, setPass] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(true);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,11 +47,15 @@ const Register = () => {
     } else if (name === "checkPassword") {
       setCheckPassword(value);
     }
-
-    if (password === checkPassword) {
-      setPass(true);
-    }
   };
+
+  useEffect(() => {
+    if (password === checkPassword) {
+      setError(false);
+    } else {
+      setError(true);
+    }
+  }, [password, checkPassword]);
 
   return (
     <div className={styles.container}>
@@ -102,6 +106,7 @@ const Register = () => {
           id="checkPassword"
           value={checkPassword}
           onChange={handleChange}
+          error={error}
         />
 
         <button className={styles.regiBtn}>회원가입</button>
