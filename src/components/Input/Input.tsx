@@ -35,6 +35,7 @@ const Input = ({
         className={
           error ? `${styles.input} ${styles.errorInput}` : ` ${styles.input}`
         }
+        required
       />
     </div>
   );

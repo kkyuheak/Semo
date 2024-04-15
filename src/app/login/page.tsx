@@ -1,16 +1,43 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./login.module.css";
 import Link from "next/link";
 import Input from "@/components/Input/Input";
-import { signIn, useSession } from "next-auth/react";
+import { SignInResponse, signIn, useSession } from "next-auth/react";
+import axios from "axios";
 
 const LoginPage = () => {
   const { data: session } = useSession();
   console.log(session);
 
-  const handleSubmit = (e: any) => {
+  const [id, setId] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    try {
+      const response: SignInResponse | undefined = await signIn("credentials", {
+        id,
+        password,
+      });
+
+      console.log(response);
+      console.log("로그인 성공");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { name, value },
+    } = e;
+
+    if (name === "id") {
+      setId(value);
+    } else if (name === "password") {
+      setPassword(value);
+    }
   };
 
   return (
@@ -21,6 +48,8 @@ const LoginPage = () => {
           placeholder="아이디를 입력해주세요"
           name="id"
           id="id"
+          value={id}
+          onChange={handleChange}
         />
 
         <Input
@@ -29,16 +58,11 @@ const LoginPage = () => {
           type="password"
           name="password"
           id="password"
+          value={password}
+          onChange={handleChange}
         />
 
-        <button
-          className={styles.loginBtn}
-          onClick={() => {
-            signIn();
-          }}
-        >
-          로그인
-        </button>
+        <button className={styles.loginBtn}>로그인</button>
       </form>
 
       <div>

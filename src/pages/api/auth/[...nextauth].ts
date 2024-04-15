@@ -2,6 +2,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
@@ -10,31 +11,46 @@ export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
-      // The name to display on the sign in form (e.g. "Sign in with...")
       name: "Credentials",
 
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        id: { label: "Id", type: "text" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
-
-        if (user) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user;
-        } else {
-          // If you return null then an error will be displayed advising the user to check their details.
-          return null;
-
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+        if (!credentials?.id || !credentials?.password) {
+          throw new Error("아이디와 비밀번호 둘 다 입력하셔야 합니다");
         }
+
+        // Add logic here to look up the user from the credentials supplied
+        const user = await prisma.user.findUnique({
+          where: {
+            id: credentials?.id,
+          },
+        });
+
+        if (!user || !user.hashedPassword) {
+          throw new Error("일치하는 정보가 없습니다!");
+        }
+
+        const comparePassword = bcrypt.compare(
+          user.hashedPassword,
+          credentials.password
+        );
+
+        if (!comparePassword) {
+          throw new Error("비밀번호가 일치하지 않습니다 !");
+        }
+
+        return user;
       },
     }),
   ],
   session: {
     strategy: "jwt",
+  },
+  pages: {
+    signIn: "/login",
   },
 };
 
