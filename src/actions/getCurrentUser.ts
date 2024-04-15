@@ -1,5 +1,4 @@
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { PrismaClient } from "@prisma/client";
+import { authOptions, prisma } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 
 // const getSession = async () => {
@@ -16,8 +15,6 @@ export interface ICurrentUser {
 }
 
 export default async function getCurrentUser() {
-  const prisma = new PrismaClient();
-
   try {
     const session = await getServerSession(authOptions);
     console.log("session", session);

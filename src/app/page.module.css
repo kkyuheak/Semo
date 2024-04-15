@@ -59,3 +59,34 @@
     font-size: 30px;
   }
 }
+
+/* not-found */
+.notFound {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notFoundBox {
+  background-color: #b9b9b9;
+  width: 400px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  border-radius: 10px;
+}
+
+.notFoundBox > p {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.notFoundBox > a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

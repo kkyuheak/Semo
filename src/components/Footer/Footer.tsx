@@ -45,7 +45,9 @@ export default function Footer() {
 
         {/* github repository */}
         <div className={styles.footerGitLink}>
-          <Link href={"https://github.com/kkyuheak/Semo"}>Git Repository</Link>
+          <Link href={"https://github.com/kkyuheak/Semo"} target="_blank">
+            Git Repository
+          </Link>
         </div>
       </div>
     </footer>

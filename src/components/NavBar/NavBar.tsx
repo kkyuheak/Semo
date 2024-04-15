@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "./navbar.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { ICurrentUser } from "@/actions/getCurrentUser";
 
@@ -18,6 +18,7 @@ export default function NavBar({
   const [whiteNav, setWhiteNav] = useState<boolean>(false);
 
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const height: number = document.getElementById("visit")?.offsetTop!;
@@ -98,27 +99,40 @@ export default function NavBar({
 
         {/* topNav Items */}
 
-        <ul className={styles.topNavList}>
-          {currentUser ? (
-            <li
-              onClick={() => {
-                signOut();
-              }}
-            >
-              로그아웃
-            </li>
-          ) : (
+        <div className={styles.topNavList}>
+          <ul className={styles.topNavListItem}>
+            {currentUser ? (
+              <li className={styles.navUserName}>{currentUser.nickname}님</li>
+            ) : (
+              <li>
+                {pathname === "/login" ? null : (
+                  <Link href={"/login"}>로그인</Link>
+                )}
+              </li>
+            )}
             <li>
-              <Link href={"/login"}>로그인</Link>
+              <Link href={""}>전시와 교육</Link>
             </li>
-          )}
-          <li>
-            <Link href={""}>전시와 교육</Link>
-          </li>
-          <li>
-            <Link href={"/collection"}>미술관 소장품</Link>
-          </li>
-        </ul>
+            <li>
+              <Link href={"/collection"}>미술관 소장품</Link>
+            </li>
+          </ul>
+
+          <div className={styles.hideNavMenu}>
+            <ul>
+              <li>
+                <Link href={"/"}>회원정보</Link>
+              </li>
+              <li
+                onClick={() => {
+                  signOut();
+                }}
+              >
+                로그아웃
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );
