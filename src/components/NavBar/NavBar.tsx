@@ -5,11 +5,15 @@ import styles from "./navbar.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
+import { ICurrentUser } from "@/actions/getCurrentUser";
 
-export default function NavBar() {
+export default function NavBar({
+  currentUser,
+}: {
+  currentUser: ICurrentUser | undefined;
+}) {
   // 로그인세션 여부
-  const { data: session } = useSession();
 
   const [whiteNav, setWhiteNav] = useState<boolean>(false);
 
@@ -95,7 +99,7 @@ export default function NavBar() {
         {/* topNav Items */}
 
         <ul className={styles.topNavList}>
-          {session ? (
+          {currentUser ? (
             <li
               onClick={() => {
                 signOut();

@@ -3,13 +3,10 @@ import React, { useState } from "react";
 import styles from "./login.module.css";
 import Link from "next/link";
 import Input from "@/components/Input/Input";
-import { SignInResponse, signIn, useSession } from "next-auth/react";
+import { SignInResponse, signIn } from "next-auth/react";
 import axios from "axios";
 
 const LoginPage = () => {
-  const { data: session } = useSession();
-  console.log(session);
-
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
