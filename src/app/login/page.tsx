@@ -5,23 +5,37 @@ import Link from "next/link";
 import Input from "@/components/Input/Input";
 import { SignInResponse, signIn } from "next-auth/react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
+  const router = useRouter();
+
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const response: SignInResponse | undefined = await signIn("credentials", {
-        id,
-        password,
-      });
+    if (id && password) {
+      try {
+        setLoading(true);
+        const response: SignInResponse | undefined = await signIn(
+          "credentials",
+          {
+            id,
+            password,
+          }
+        );
 
-      console.log(response);
-      console.log("로그인 성공");
-    } catch (error) {
-      console.log(error);
+        console.log(response);
+        console.log("로그인 성공");
+        router.push("/");
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 

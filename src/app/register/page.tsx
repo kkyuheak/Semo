@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./register.module.css";
 import Link from "next/link";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
   const [id, setId] = useState<string>("");
@@ -16,18 +17,33 @@ const Register = () => {
   // 비밀번호 검사 통과
   const [error, setError] = useState<boolean>(true);
 
+  // 로딩
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const router = useRouter();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("/api/register", {
-        id,
-        password,
-        email,
-        nickname,
-      });
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+    if (password === checkPassword) {
+      try {
+        setLoading(true);
+
+        const response = await axios.post("/api/register", {
+          id,
+          password,
+          email,
+          nickname,
+        });
+        console.log(response);
+
+        router.push("/");
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      return;
     }
   };
 
@@ -99,7 +115,7 @@ const Register = () => {
         />
 
         <Input
-          label="비밀번호 확인"
+          label={error ? "비밀번호 틀립니다!" : "비밀번호 확인"}
           placeholder="비밀번호를 한번 더 입력해주세요"
           type="password"
           name="checkPassword"
@@ -109,7 +125,9 @@ const Register = () => {
           error={error}
         />
 
-        <button className={styles.regiBtn}>회원가입</button>
+        <button className={styles.regiBtn}>
+          {loading ? "잠시만 기다려주세요!" : "회원가입"}
+        </button>
       </form>
 
       <div>

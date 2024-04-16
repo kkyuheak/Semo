@@ -13,9 +13,8 @@ export default function NavBar({
 }: {
   currentUser: ICurrentUser | undefined;
 }) {
-  // 로그인세션 여부
-
   const [whiteNav, setWhiteNav] = useState<boolean>(false);
+  const [hide, setHide] = useState<boolean>(true);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -102,7 +101,18 @@ export default function NavBar({
         <div className={styles.topNavList}>
           <ul className={styles.topNavListItem}>
             {currentUser ? (
-              <li className={styles.navUserName}>{currentUser.nickname}님</li>
+              <li
+                className={styles.navUserName}
+                onClick={() => {
+                  if (hide) {
+                    setHide(false);
+                  } else {
+                    setHide(true);
+                  }
+                }}
+              >
+                {currentUser.nickname}님
+              </li>
             ) : (
               <li>
                 {pathname === "/login" ? null : (
@@ -118,7 +128,13 @@ export default function NavBar({
             </li>
           </ul>
 
-          <div className={styles.hideNavMenu}>
+          <div
+            className={
+              hide
+                ? `${styles.hideNavMenu} ${styles.hide}`
+                : `${styles.hideNavMenu}`
+            }
+          >
             <ul>
               <li>
                 <Link href={"/"}>회원정보</Link>

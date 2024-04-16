@@ -87,6 +87,7 @@
   display: flex;
   font-size: 18px;
   gap: 15px;
+  /* padding-left: 21px; */
 }
 
 .topNavListItem > li {
@@ -96,12 +97,15 @@
 /* 로그인 후  호버 메뉴(숨김메뉴) */
 .hideNavMenu {
   position: absolute;
-  top: 20px;
+  top: 35px;
   left: 0;
-  background-color: pink;
+  background-color: rgb(207, 207, 207);
   width: 100px;
   padding: 10px;
   border-radius: 10px;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.2s;
 }
 
 .hideNavMenu > ul {
@@ -118,4 +122,9 @@
 
 .hideNavMenu > ul > li:hover {
   text-decoration: underline;
+}
+
+.hide {
+  opacity: 0;
+  visibility: hidden;
 }
