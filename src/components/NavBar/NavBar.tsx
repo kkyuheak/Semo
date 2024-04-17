@@ -29,7 +29,20 @@ export default function NavBar({
         setWhiteNav(false);
       }
     });
+
+    window.addEventListener("click", () => {
+      setHide(true);
+    });
   }, []);
+
+  const handleNameClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    if (hide) {
+      setHide(false);
+    } else {
+      setHide(true);
+    }
+  };
 
   // // 메인 홈 nav
   // if (pathname === "/") {
@@ -101,16 +114,7 @@ export default function NavBar({
         <div className={styles.topNavList}>
           <ul className={styles.topNavListItem}>
             {currentUser ? (
-              <li
-                className={styles.navUserName}
-                onClick={() => {
-                  if (hide) {
-                    setHide(false);
-                  } else {
-                    setHide(true);
-                  }
-                }}
-              >
+              <li className={styles.navUserName} onClick={handleNameClick}>
                 {currentUser.nickname}님
               </li>
             ) : (
@@ -134,6 +138,9 @@ export default function NavBar({
                 ? `${styles.hideNavMenu} ${styles.hide}`
                 : `${styles.hideNavMenu}`
             }
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
           >
             <ul>
               <li>

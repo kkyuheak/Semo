@@ -1,10 +1,6 @@
 import { authOptions, prisma } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 
-// const getSession = async () => {
-//   return await getServerSession(authOptions)
-// }
-
 export interface ICurrentUser {
   id: string;
   email: string;
