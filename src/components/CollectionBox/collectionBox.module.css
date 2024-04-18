@@ -1,0 +1,17 @@
+.container {
+  width: 140px;
+  /* background-color: pink; */
+  cursor: pointer;
+}
+
+.cBoxTitle {
+  font-size: 20px;
+}
+
+.cBoxName {
+  font-size: 14px;
+}
+
+.cBoxYear {
+  font-size: 12px;
+}
