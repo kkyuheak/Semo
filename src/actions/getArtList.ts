@@ -40,7 +40,7 @@ export interface IExhibit {
 export const getArtList = async (item: string) => {
   try {
     const response = await axios.get(
-      `http://openapi.seoul.go.kr:8088/${process.env.API_KEY}/json/${item}`
+      `http://openapi.seoul.go.kr:8088/${process.env.NEXT_PUBLIC_API_KEY}/json/${item}`
     );
 
     return response;
