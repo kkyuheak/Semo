@@ -1,3 +1,30 @@
+.collectionList {
+  max-width: 900px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: auto;
+  margin-top: 30px;
+  /* overflow-x: hidden; */
+}
+
+@media screen and (min-width: 1400px) {
+  .collectionList {
+    max-width: 1300px;
+    gap: 20px;
+  }
+}
+
+.searchOption {
+  width: 120px;
+  height: 60px;
+  font-style: 20px;
+  outline: none;
+  border-radius: 15px;
+  margin-right: 5px;
+}
+
 .searchBar {
   width: 600px;
   margin: auto;

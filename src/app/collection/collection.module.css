@@ -15,21 +15,3 @@
   font-size: 34px;
   margin-top: 10px;
 }
-
-.collectionList {
-  max-width: 900px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin: auto;
-  margin-top: 30px;
-  /* overflow-x: hidden; */
-}
-
-@media screen and (min-width: 1400px) {
-  .collectionList {
-    border: 1px solid red;
-    max-width: 1300px;
-    gap: 20px;
-  }
-}
