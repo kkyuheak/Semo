@@ -4,15 +4,26 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./collectionList.module.css";
 import { ICollection, getArtList } from "@/actions/getArtList";
 import CollectionBox from "../CollectionBox/CollectionBox";
+import Pagination from "../pagination/Pagination";
 
 const CollectionList = () => {
+  let firstPage = 1;
+  let lastPage = 1000;
+
+  // 페이지네이션
+  const [limitData, setLimitData] = useState<number>(40);
+  const [page, setPage] = useState<number>(1);
+  const offset = (page - 1) * limitData;
+
   const [inputValue, setInputValue] = useState<string | number>();
   const [data, setData] = useState<ICollection[]>([]);
   const [plholder, setPlHolder] = useState("소장품을 검색해보세요!");
   const selectRef = useRef<HTMLSelectElement>(null);
 
   const getData = async () => {
-    const collection = await getArtList("SemaPsgudInfoKorInfo/1/40");
+    const collection = await getArtList(
+      `SemaPsgudInfoKorInfo/${firstPage}/${lastPage}`
+    );
     console.log("collection: ", collection);
     const data: ICollection[] = await collection?.data.SemaPsgudInfoKorInfo.row;
     if (data) {
@@ -92,14 +103,17 @@ const CollectionList = () => {
         <button className={styles.searchBtn}>검색</button>
       </form>
       <div className={styles.collectionList}>
-        {data.map((item, i) => {
+        {data.slice(offset, offset + limitData).map((item, i) => {
           return <CollectionBox data={item} key={i} />;
         })}
       </div>
-      <div className={styles.pageBtn}>
-        <span className={styles.prevBtn}>{`< 이전`}</span>
-        <span className={styles.nextBtn}>{`다음 >`}</span>
-      </div>
+      {/* pagination */}
+      <Pagination
+        page={page}
+        setPage={setPage}
+        limit={limitData}
+        total={data.length}
+      />
     </div>
   );
 };

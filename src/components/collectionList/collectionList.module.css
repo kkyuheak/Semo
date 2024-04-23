@@ -55,3 +55,16 @@
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+
+.pageBtn {
+  border: 1px solid red;
+  width: 300px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.pageBtn > span {
+  cursor: pointer;
+}

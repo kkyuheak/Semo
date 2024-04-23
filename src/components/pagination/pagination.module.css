@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.numWrapper {
+  display: flex;
+  /* align-items: center;
+  justify-content: center; */
+  gap: 5px;
+}
+
+.pageNum {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid red;
+}
