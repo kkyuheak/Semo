@@ -7,9 +7,6 @@ import CollectionBox from "../CollectionBox/CollectionBox";
 import Pagination from "../pagination/Pagination";
 
 const CollectionList = () => {
-  let firstPage = 1;
-  let lastPage = 1000;
-
   // 페이지네이션
   const [limitData, setLimitData] = useState<number>(40);
   const [page, setPage] = useState<number>(1);
@@ -21,9 +18,7 @@ const CollectionList = () => {
   const selectRef = useRef<HTMLSelectElement>(null);
 
   const getData = async () => {
-    const collection = await getArtList(
-      `SemaPsgudInfoKorInfo/${firstPage}/${lastPage}`
-    );
+    const collection = await getArtList(`SemaPsgudInfoKorInfo/1/1000`);
     console.log("collection: ", collection);
     const data: ICollection[] = await collection?.data.SemaPsgudInfoKorInfo.row;
     if (data) {
