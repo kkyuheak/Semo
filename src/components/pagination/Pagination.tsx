@@ -23,7 +23,7 @@ const Pagination = ({ page, setPage, limit, total }: IPagiNation) => {
     }
   };
 
-  const startPage: number = (currentPageGroup - 1) * 5 - 1;
+  const startPage: number = (currentPageGroup - 1) * 5 + 1;
   const endPage = Math.min(currentPageGroup * 5, totalNumPages);
   const pageNumbers = Array.from(
     { length: endPage - startPage + 1 },
@@ -59,12 +59,12 @@ const Pagination = ({ page, setPage, limit, total }: IPagiNation) => {
             <div
               key={pagenum}
               className={
-                page === pagenum + 1
+                page === pagenum
                   ? `${styles.pageNum} ${styles.onPage}`
                   : `${styles.pageNum}`
               }
               onClick={() => {
-                setPage(pagenum + 1);
+                setPage(pagenum);
               }}
             >
               {pagenum}
