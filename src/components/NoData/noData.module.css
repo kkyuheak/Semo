@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+  height: calc(100vh - 300px);
+  display: flex;
+  /* align-items: center;
+  justify-content: center; */
+}
+
+.noData_box {
+  padding: 5px;
+  width: 250px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  border: 2px solid #000;
+  border-radius: 10px;
+  margin: auto;
+}
+
+.linkHome {
+  border: 2px solid #b1b1b1;
+  border-radius: 10px;
+  padding: 10px 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.linkHome:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}

@@ -1,5 +1,6 @@
 .collectionList {
   max-width: 900px;
+  height: 1300px;
   display: flex;
   justify-content: center;
   gap: 10px;

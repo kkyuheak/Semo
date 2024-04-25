@@ -1,7 +1,7 @@
 import styles from "./collection.module.css";
 import CollectionList from "@/components/collectionList/CollectionList";
 
-export default async function CollectionPage() {
+export default function CollectionPage() {
   return (
     <div className={styles.container} id="collection">
       <p className={styles.cTitle}>미술관 소장품</p>

@@ -24,7 +24,7 @@ const Pagination = ({ page, setPage, limit, total }: IPagiNation) => {
   };
 
   const startPage: number = (currentPageGroup - 1) * 5 + 1;
-  const endPage = Math.min(currentPageGroup * 5, totalNumPages);
+  const endPage = currentPageGroup * 5;
   const pageNumbers = Array.from(
     { length: endPage - startPage + 1 },
     (_, i) => startPage + i
@@ -32,28 +32,9 @@ const Pagination = ({ page, setPage, limit, total }: IPagiNation) => {
   return (
     <div className={styles.container}>
       <button onClick={() => handleClick("minus")} disabled={page === 1}>
-        <LuArrowLeftCircle size={40} />
+        <LuArrowLeftCircle size={35} />
       </button>
       <div className={styles.numWrapper}>
-        {/* {Array(totalNumPages)
-          .fill("")
-          .map((_, i) => {
-            return (
-              <div
-                key={i}
-                className={
-                  page === i + 1
-                    ? `${styles.pageNum} ${styles.onPage}`
-                    : `${styles.pageNum}`
-                }
-                onClick={() => {
-                  setPage(i + 1);
-                }}
-              >
-                {i + 1}
-              </div>
-            );
-          })} */}
         {pageNumbers.map((pagenum) => {
           return (
             <div
@@ -71,12 +52,22 @@ const Pagination = ({ page, setPage, limit, total }: IPagiNation) => {
             </div>
           );
         })}
+        <div
+          className={
+            currentPageGroup === 5 ? `${styles.hidePage}` : `${styles.pageNum}`
+          }
+          onClick={() => {
+            setPage(endPage + 1);
+          }}
+        >
+          ...
+        </div>
       </div>
       <button
         onClick={() => handleClick("plus")}
         disabled={page === totalNumPages}
       >
-        <LuArrowRightCircle size={40} />
+        <LuArrowRightCircle size={35} />
       </button>
     </div>
   );

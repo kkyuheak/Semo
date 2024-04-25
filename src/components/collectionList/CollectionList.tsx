@@ -5,8 +5,12 @@ import styles from "./collectionList.module.css";
 import { ICollection, getArtList } from "@/actions/getArtList";
 import CollectionBox from "../CollectionBox/CollectionBox";
 import Pagination from "../pagination/Pagination";
+import RoundLoading from "../roundLoading/RoundLoading";
+import NoData from "../NoData/NoData";
 
 const CollectionList = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   // 페이지네이션
   const [limitData, setLimitData] = useState<number>(40);
   const [page, setPage] = useState<number>(1);
@@ -18,11 +22,18 @@ const CollectionList = () => {
   const selectRef = useRef<HTMLSelectElement>(null);
 
   const getData = async () => {
-    const collection = await getArtList(`SemaPsgudInfoKorInfo/1/1000`);
-    console.log("collection: ", collection);
-    const data: ICollection[] = await collection?.data.SemaPsgudInfoKorInfo.row;
-    if (data) {
-      setData(data);
+    try {
+      setIsLoading(true);
+      const collection = await getArtList(`SemaPsgudInfoKorInfo/1/1000`);
+      console.log("collection: ", collection);
+      const data: ICollection[] = await collection?.data.SemaPsgudInfoKorInfo
+        .row;
+      if (data) {
+        setData(data);
+      }
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -31,10 +42,10 @@ const CollectionList = () => {
   };
 
   const handleSumbit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (inputValue === "") {
       return;
     }
-    e.preventDefault();
 
     const value: string = selectRef.current?.value!;
 
@@ -74,42 +85,54 @@ const CollectionList = () => {
   }, []);
 
   return (
-    <div>
-      <form className={styles.searchBar} onSubmit={handleSumbit}>
-        <select
-          ref={selectRef}
-          name="category"
-          id="category"
-          className={styles.searchOption}
-          onChange={selectChange}
-        >
-          <option value="nm_kor">{"작품명(국문)"}</option>
-          <option value="nm_eng">{"작품명(영문)"}</option>
-          <option value="year">수집연도</option>
-          <option value="cl_nm">부문</option>
-        </select>
-        <input
-          type="text"
-          placeholder={plholder}
-          className={styles.searchInput}
-          onChange={handleChange}
-          required
-        />
-        <button className={styles.searchBtn}>검색</button>
-      </form>
-      <div className={styles.collectionList}>
-        {data.slice(offset, offset + limitData).map((item, i) => {
-          return <CollectionBox data={item} key={i} />;
-        })}
-      </div>
-      {/* pagination */}
-      <Pagination
-        page={page}
-        setPage={setPage}
-        limit={limitData}
-        total={data.length}
-      />
-    </div>
+    <>
+      {!isLoading ? (
+        <div>
+          <form className={styles.searchBar} onSubmit={handleSumbit}>
+            <select
+              ref={selectRef}
+              name="category"
+              id="category"
+              className={styles.searchOption}
+              onChange={selectChange}
+            >
+              <option value="nm_kor">{"작품명(국문)"}</option>
+              <option value="nm_eng">{"작품명(영문)"}</option>
+              <option value="year">수집연도</option>
+              <option value="cl_nm">부문</option>
+            </select>
+            <input
+              type="text"
+              placeholder={plholder}
+              className={styles.searchInput}
+              onChange={handleChange}
+              required
+            />
+            <button className={styles.searchBtn}>검색</button>
+          </form>
+          {!data || data.length === 0 ? (
+            <NoData reset={true} />
+          ) : (
+            <>
+              <div className={styles.collectionList}>
+                {data.slice(offset, offset + limitData).map((item, i) => {
+                  return <CollectionBox data={item} key={i} />;
+                })}
+              </div>
+              {/* pagination */}
+              <Pagination
+                page={page}
+                setPage={setPage}
+                limit={limitData}
+                total={data.length}
+              />
+            </>
+          )}
+        </div>
+      ) : (
+        <RoundLoading />
+      )}
+    </>
   );
 };
 
