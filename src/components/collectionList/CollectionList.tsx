@@ -10,6 +10,8 @@ import NoData from "../NoData/NoData";
 
 const CollectionList = () => {
   const [isLoading, setIsLoading] = useState(false);
+  // 데이터가 있는지 없는지
+  const [isData, setIsData] = useState(true);
 
   // 페이지네이션
   const [limitData, setLimitData] = useState<number>(40);
@@ -28,7 +30,7 @@ const CollectionList = () => {
       console.log("collection: ", collection);
       const data: ICollection[] = await collection?.data.SemaPsgudInfoKorInfo
         .row;
-      if (data) {
+      if (data.length) {
         setData(data);
       }
     } catch (error) {
@@ -57,15 +59,20 @@ const CollectionList = () => {
     };
 
     try {
+      setIsLoading(true);
       if (value && option[value]) {
         const response = await getArtList(
           `SemaPsgudInfoKorInfo/1/50/${option[value]}`
         );
+        console.log(response);
         const searchData = response?.data.SemaPsgudInfoKorInfo.row;
         setData(searchData);
       }
     } catch (error) {
+      setIsData(false);
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -110,24 +117,23 @@ const CollectionList = () => {
             />
             <button className={styles.searchBtn}>검색</button>
           </form>
-          {!data || data.length === 0 ? (
-            <NoData reset={true} />
+
+          {isData ? (
+            <div className={styles.collectionList}>
+              {data.slice(offset, offset + limitData).map((item, i) => {
+                return <CollectionBox data={item} key={i} />;
+              })}
+            </div>
           ) : (
-            <>
-              <div className={styles.collectionList}>
-                {data.slice(offset, offset + limitData).map((item, i) => {
-                  return <CollectionBox data={item} key={i} />;
-                })}
-              </div>
-              {/* pagination */}
-              <Pagination
-                page={page}
-                setPage={setPage}
-                limit={limitData}
-                total={data.length}
-              />
-            </>
+            <NoData reset={true} />
           )}
+          {/* pagination */}
+          <Pagination
+            page={page}
+            setPage={setPage}
+            limit={limitData}
+            total={data.length}
+          />
         </div>
       ) : (
         <RoundLoading />
