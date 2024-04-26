@@ -60,6 +60,7 @@ const CollectionList = () => {
 
     try {
       setIsLoading(true);
+      setIsData(true);
       if (value && option[value]) {
         const response = await getArtList(
           `SemaPsgudInfoKorInfo/1/50/${option[value]}`
