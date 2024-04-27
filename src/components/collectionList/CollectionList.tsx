@@ -7,9 +7,12 @@ import CollectionBox from "../CollectionBox/CollectionBox";
 import Pagination from "../pagination/Pagination";
 import RoundLoading from "../roundLoading/RoundLoading";
 import NoData from "../NoData/NoData";
+import { useRouter } from "next/navigation";
 
 const CollectionList = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
   // 데이터가 있는지 없는지
   const [isData, setIsData] = useState(true);
 
@@ -122,7 +125,16 @@ const CollectionList = () => {
           {isData ? (
             <div className={styles.collectionList}>
               {data.slice(offset, offset + limitData).map((item, i) => {
-                return <CollectionBox data={item} key={i} />;
+                return (
+                  <div
+                    key={i}
+                    onClick={() => {
+                      router.push(`/collection/${item.prdct_nm_korean}`);
+                    }}
+                  >
+                    <CollectionBox data={item} />
+                  </div>
+                );
               })}
             </div>
           ) : (

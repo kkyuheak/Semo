@@ -33,7 +33,7 @@ export default function NavBar({
     window.addEventListener("click", () => {
       setHide(true);
     });
-  }, []);
+  });
 
   const handleNameClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
