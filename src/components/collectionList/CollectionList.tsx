@@ -124,18 +124,23 @@ const CollectionList = () => {
 
           {isData ? (
             <div className={styles.collectionList}>
-              {data.slice(offset, offset + limitData).map((item, i) => {
-                return (
-                  <div
-                    key={i}
-                    onClick={() => {
-                      router.push(`/collection/${item.prdct_nm_korean}`);
-                    }}
-                  >
-                    <CollectionBox data={item} />
-                  </div>
-                );
-              })}
+              {data
+                .slice(offset, offset + limitData)
+                .map((item: ICollection, i) => {
+                  return (
+                    <div
+                      key={i}
+                      onClick={() => {
+                        router.push(
+                          `/collection/${item.prdct_nm_korean}?n=${item.writr_nm}`
+                        );
+                        localStorage.setItem("item", JSON.stringify(item));
+                      }}
+                    >
+                      <CollectionBox data={item} />
+                    </div>
+                  );
+                })}
             </div>
           ) : (
             <NoData reset={true} />
