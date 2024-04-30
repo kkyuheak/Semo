@@ -7,13 +7,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./collectionDt.module.css";
 import NoData from "@/components/NoData/NoData";
 
-interface IParams {
-  params: {
-    productKrName: string;
-  };
-}
-
-const CollectionDtPage = ({ params }: IParams) => {
+const CollectionDtPage = () => {
   // 제작자 이름 가져오기
   const searchParams = useSearchParams();
   const wri_Nm = searchParams?.get("n");

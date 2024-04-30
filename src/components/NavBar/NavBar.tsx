@@ -125,7 +125,7 @@ export default function NavBar({
               </li>
             )}
             <li>
-              <Link href={""}>전시와 교육</Link>
+              <Link href={"/exhibitions"}>전시와 교육</Link>
             </li>
             <li>
               <Link href={"/collection"}>미술관 소장품</Link>
