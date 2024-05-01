@@ -1,0 +1,18 @@
+.container {
+  max-width: 1300px;
+  margin: auto;
+  border: 1px solid red;
+  margin-top: 40px;
+}
+
+.edu_title {
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.edu_img {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}

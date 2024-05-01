@@ -1,4 +1,17 @@
 .container {
   max-width: 100%;
-  border: 1px solid red;
+}
+
+.swiperImgWrapper {
+  width: 400px;
+}
+
+@media screen and (max-width: 1300px) {
+  .swiperImgWrapper {
+    width: 350px;
+  }
+  .exhibitMainImg {
+    width: 350px;
+    height: 250px;
+  }
 }

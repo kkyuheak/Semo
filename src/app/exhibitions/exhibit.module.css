@@ -4,3 +4,11 @@
   transform: translateY(100px);
   position: relative;
 }
+
+.main_title {
+  max-width: 1300px;
+  margin: auto;
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
