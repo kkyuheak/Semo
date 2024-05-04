@@ -8,15 +8,26 @@ import styles from "./ExhibitImg.module.css";
 
 import "swiper/css";
 import { Autoplay, EffectCoverflow, Mousewheel } from "swiper/modules";
+import RoundLoading from "../roundLoading/RoundLoading";
 
 const ExhibitionImage = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const [result, setResult] = useState<IExhibit[]>([]);
 
   const getExhibit = async () => {
-    const response = await getArtList(`ListExhibitionOfSeoulMOAInfo/1/20/`);
-    const exhibit: IExhibit[] = response?.data.ListExhibitionOfSeoulMOAInfo.row;
-    console.log(exhibit);
-    setResult(exhibit);
+    try {
+      setIsLoading(true);
+      const response = await getArtList(`ListExhibitionOfSeoulMOAInfo/1/20/`);
+      const exhibit: IExhibit[] = await response?.data
+        .ListExhibitionOfSeoulMOAInfo.row;
+      console.log(exhibit);
+      setResult(exhibit);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -25,36 +36,43 @@ const ExhibitionImage = () => {
 
   return (
     <div className={styles.container}>
-      <Swiper
-        modules={[EffectCoverflow, Mousewheel, Autoplay]}
-        autoplay={true}
-        effect="coverflow"
-        loop={true}
-        grabCursor={true}
-        slidesPerView={"auto"}
-        mousewheel={{ enabled: true }}
-        coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true,
-        }}
-      >
-        {result.map((item) => {
-          return (
-            <SwiperSlide key={item.DP_SEQ} className={styles.swiperImgWrapper}>
-              <Image
-                src={item.DP_MAIN_IMG}
-                alt={item.DP_NAME}
-                width={400}
-                height={300}
-                className={styles.exhibitMainImg}
-              />
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
+      {isLoading ? (
+        <RoundLoading />
+      ) : (
+        <Swiper
+          modules={[EffectCoverflow, Mousewheel, Autoplay]}
+          autoplay={true}
+          effect="coverflow"
+          loop={true}
+          grabCursor={true}
+          slidesPerView={"auto"}
+          mousewheel={{ enabled: true }}
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+          }}
+        >
+          {result.map((item) => {
+            return (
+              <SwiperSlide
+                key={item.DP_SEQ}
+                className={styles.swiperImgWrapper}
+              >
+                <Image
+                  src={item.DP_MAIN_IMG}
+                  alt={item.DP_NAME}
+                  width={400}
+                  height={300}
+                  className={styles.exhibitMainImg}
+                />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      )}
     </div>
   );
 };
