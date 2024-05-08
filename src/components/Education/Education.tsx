@@ -25,7 +25,7 @@ const Education = () => {
   const getEdu = async () => {
     try {
       setIsLoading(true);
-      const response = await getArtList(`ListEducationOfSeoulMOAInfo/1/1000/`);
+      const response = await getArtList(`ListEducationOfSeoulMOAInfo/1/500/`);
       setEduData(response?.data.ListEducationOfSeoulMOAInfo.row);
     } catch (error) {
       console.log(error);
@@ -70,7 +70,7 @@ const Education = () => {
                     setShowIndex(null);
                   }}
                   onClick={() => {
-                    router.push("");
+                    router.push(`/education/${edu.ACADMY_NO}`);
                   }}
                 >
                   <Image
@@ -115,7 +115,7 @@ const Education = () => {
                     key={item.ACADMY_NO}
                     className={styles.edu_limit_img}
                     onClick={() => {
-                      router.push("");
+                      router.push(`/education/${item.ACADMY_NO}`);
                     }}
                   >
                     <Image
@@ -129,6 +129,9 @@ const Education = () => {
                       <p>장소: {item.EDU_PLACE}</p>
                       <p>수강료 : {item.ISFREE}</p>
                       <p>모집 정원: {item.CAPA_NUM}명</p>
+                      <p>
+                        모집 기간: {item.APP_OPEN}부터 {item.APP_CLOSE}까지
+                      </p>
                     </div>
                   </div>
                 );

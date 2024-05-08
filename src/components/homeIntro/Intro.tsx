@@ -13,7 +13,6 @@ export default function Intro() {
       } else {
         setScroll(false);
       }
-      console.log(window.scrollY);
     });
   }, []);
 

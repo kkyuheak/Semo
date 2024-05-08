@@ -1,0 +1,39 @@
+.container {
+  max-width: 1300px;
+  margin: auto;
+  padding: 60px 0;
+}
+
+.edu_detail_wrapper > img {
+  width: 100%;
+  height: 600px;
+}
+
+.eduDetail {
+  margin-top: 20px;
+}
+
+.eduDetail > h1 {
+  margin-bottom: 20px;
+}
+
+.eduDetail > p {
+  font-size: 20px;
+  margin-top: 2px;
+}
+
+.eduResBtn > button {
+  margin-top: 50px;
+  width: 280px;
+  background-color: #fff;
+  padding: 20px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 5px;
+}
+
+.eduResBtn > button:hover {
+  background-color: #000;
+  color: #fff;
+}
