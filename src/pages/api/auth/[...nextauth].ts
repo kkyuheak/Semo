@@ -33,9 +33,9 @@ export const authOptions: NextAuthOptions = {
           throw new Error("일치하는 정보가 없습니다!");
         }
 
-        const comparePassword = bcrypt.compare(
-          user.hashedPassword,
-          credentials.password
+        const comparePassword = await bcrypt.compare(
+          credentials.password,
+          user.hashedPassword
         );
 
         if (!comparePassword) {

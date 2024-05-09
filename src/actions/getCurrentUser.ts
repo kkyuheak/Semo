@@ -6,8 +6,8 @@ export interface ICurrentUser {
   email: string;
   nickname: string;
   hashedPassword: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export default async function getCurrentUser() {

@@ -1,18 +1,23 @@
 "use client";
 
 import { IEducation, getArtList } from "@/actions/getArtList";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import styles from "./educationDetail.module.css";
 import Image from "next/image";
 import RoundLoading from "@/components/roundLoading/RoundLoading";
+import dayjs from "dayjs";
 
 const EducationDetailPage = () => {
   const params = useParams();
+  const router = useRouter();
+
   const [isLoading, setIsLoading] = useState(false);
   console.log(params);
 
   const [filterEduData, setFilterEduData] = useState<IEducation[]>([]);
+
+  const nowDate: string = dayjs().format("YYYY-MM-DD");
 
   const getData = async () => {
     try {
@@ -64,7 +69,16 @@ const EducationDetailPage = () => {
             </div>
 
             <div className={styles.eduResBtn}>
-              <button>신청하기</button>
+              <button
+                disabled={filterEduData[0].APP_CLOSE < nowDate}
+                onClick={() => {
+                  router.push(
+                    `/education/reservation/?n=${params?.educationId}`
+                  );
+                }}
+              >
+                {filterEduData[0].APP_CLOSE < nowDate ? "신청마감" : "신청하기"}
+              </button>
             </div>
           </div>
         </div>

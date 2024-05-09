@@ -20,15 +20,11 @@ const LoginPage = () => {
     if (id && password) {
       try {
         setLoading(true);
-        const response: SignInResponse | undefined = await signIn(
-          "credentials",
-          {
-            id,
-            password,
-          }
-        );
+        await signIn("credentials", {
+          id,
+          password,
+        });
 
-        console.log(response);
         console.log("로그인 성공");
         router.push("/");
       } catch (error) {

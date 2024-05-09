@@ -31,9 +31,16 @@
   cursor: pointer;
   transition: all 0.3s;
   border-radius: 5px;
+  border: 1px solid #000;
 }
 
 .eduResBtn > button:hover {
   background-color: #000;
   color: #fff;
+}
+
+.eduResBtn > button:disabled {
+  cursor: default;
+  background-color: #fff;
+  color: #7b7b7b;
 }
