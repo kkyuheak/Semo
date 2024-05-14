@@ -7,8 +7,13 @@ import styles from "./educationDetail.module.css";
 import Image from "next/image";
 import RoundLoading from "@/components/roundLoading/RoundLoading";
 import dayjs from "dayjs";
+import getCurrentUser, { ICurrentUser } from "@/actions/getCurrentUser";
+import { useUserStore } from "@/app/userStore";
 
 const EducationDetailPage = () => {
+  const { user } = useUserStore();
+  console.log("user:", user);
+
   const params = useParams();
   const router = useRouter();
 
@@ -31,7 +36,7 @@ const EducationDetailPage = () => {
           return item.ACADMY_NO === params?.educationId;
         });
         setFilterEduData(filterData);
-        console.log(filterData);
+        console.log("filterData: ", filterData);
       }
     } catch (error) {
       console.error(error);
@@ -68,18 +73,26 @@ const EducationDetailPage = () => {
               <p>교육 장소: {filterEduData[0].EDU_PLACE}</p>
             </div>
 
-            <div className={styles.eduResBtn}>
-              <button
-                disabled={filterEduData[0].APP_CLOSE < nowDate}
-                onClick={() => {
-                  router.push(
-                    `/education/reservation/?n=${params?.educationId}`
-                  );
-                }}
-              >
-                {filterEduData[0].APP_CLOSE < nowDate ? "신청마감" : "신청하기"}
-              </button>
-            </div>
+            {user ? (
+              <div className={styles.eduResBtn}>
+                <button
+                  disabled={filterEduData[0].APP_CLOSE < nowDate}
+                  onClick={() => {
+                    router.push(
+                      `/education/reservation/?n=${params?.educationId}`
+                    );
+                  }}
+                >
+                  {filterEduData[0].APP_CLOSE < nowDate
+                    ? "신청마감"
+                    : "신청하기"}
+                </button>
+              </div>
+            ) : (
+              <div>
+                <button>로그인 후 예약가능합니다</button>
+              </div>
+            )}
           </div>
         </div>
       ) : (

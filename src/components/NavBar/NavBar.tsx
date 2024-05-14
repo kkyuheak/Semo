@@ -7,12 +7,16 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { ICurrentUser } from "@/actions/getCurrentUser";
+import { useUserStore } from "@/app/userStore";
 
 export default function NavBar({
   currentUser,
 }: {
   currentUser: ICurrentUser | undefined;
 }) {
+  const { setUser, user, resetUser } = useUserStore();
+  console.log("user:", user);
+
   const [whiteNav, setWhiteNav] = useState<boolean>(false);
   const [hide, setHide] = useState<boolean>(true);
 
@@ -43,6 +47,14 @@ export default function NavBar({
       setHide(true);
     }
   };
+
+  useEffect(() => {
+    if (currentUser) {
+      setUser(currentUser);
+    } else {
+      resetUser();
+    }
+  }, []);
 
   // // 메인 홈 nav
   // if (pathname === "/") {

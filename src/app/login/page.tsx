@@ -4,7 +4,7 @@ import styles from "./login.module.css";
 import Link from "next/link";
 import Input from "@/components/Input/Input";
 import { SignInResponse, signIn } from "next-auth/react";
-import axios from "axios";
+
 import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
@@ -20,7 +20,7 @@ const LoginPage = () => {
     if (id && password) {
       try {
         setLoading(true);
-        await signIn("credentials", {
+        const response = await signIn("credentials", {
           id,
           password,
         });
