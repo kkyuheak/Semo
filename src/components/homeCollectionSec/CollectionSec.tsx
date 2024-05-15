@@ -5,13 +5,13 @@ import { ICollection, getArtList } from "@/actions/getArtList";
 export default async function CollectionSec() {
   // 소장품가져오기
   const collection = await getArtList("SemaPsgudInfoKorInfo/1/20/");
-  const collectionItem: ICollection[] =
-    collection?.data.SemaPsgudInfoKorInfo.row;
+  const collectionItem: ICollection[] = await collection?.data
+    .SemaPsgudInfoKorInfo.row;
 
   // 소장품 랜덤값
   const randomCol =
     collectionItem[Math.floor(Math.random() * collectionItem.length)];
-  // console.log("randomCol: ", randomCol);
+
   return (
     <div className={styles.container}>
       <h1 className={styles.collectionTitle}>

@@ -7,12 +7,10 @@ import styles from "./educationDetail.module.css";
 import Image from "next/image";
 import RoundLoading from "@/components/roundLoading/RoundLoading";
 import dayjs from "dayjs";
-import getCurrentUser, { ICurrentUser } from "@/actions/getCurrentUser";
 import { useUserStore } from "@/app/userStore";
 
 const EducationDetailPage = () => {
   const { user } = useUserStore();
-  console.log("user:", user);
 
   const params = useParams();
   const router = useRouter();
@@ -36,7 +34,6 @@ const EducationDetailPage = () => {
           return item.ACADMY_NO === params?.educationId;
         });
         setFilterEduData(filterData);
-        console.log("filterData: ", filterData);
       }
     } catch (error) {
       console.error(error);
@@ -89,8 +86,14 @@ const EducationDetailPage = () => {
                 </button>
               </div>
             ) : (
-              <div>
-                <button>로그인 후 예약가능합니다</button>
+              <div className={styles.eduResBtn}>
+                <button
+                  onClick={() => {
+                    router.push("/login");
+                  }}
+                >
+                  로그인 후 예약가능합니다
+                </button>
               </div>
             )}
           </div>

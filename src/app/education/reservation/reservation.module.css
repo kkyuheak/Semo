@@ -1,0 +1,47 @@
+.container {
+  padding-top: 100px;
+  max-width: 1300px;
+  margin: auto;
+}
+
+.edu_Title {
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+
+.main {
+  display: flex;
+  gap: 10px;
+  height: 1000px;
+}
+
+.main_left {
+  width: 600px;
+  height: 600px;
+  position: sticky;
+  top: 50px;
+  border: 1px solid blue;
+}
+
+.main_left > p {
+  font-size: 22px;
+  margin-top: 5px;
+}
+
+.main_right {
+  border: 1px solid red;
+  flex: 1;
+}
+
+.main_right > p {
+  font-size: 20px;
+}
+
+.cal {
+  width: 550px;
+  height: 100vh;
+  background-color: brown;
+  margin: auto;
+  margin-top: 20px;
+}
