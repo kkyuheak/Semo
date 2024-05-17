@@ -1,0 +1,25 @@
+.cal_container {
+  width: 300px;
+  border: 1px solid green;
+}
+
+.weekDay {
+  display: flex;
+}
+
+.week {
+  border: 1px solid #fff;
+  width: 40px;
+  height: 40px;
+}
+
+.dateNum {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.date {
+  border: 1px solid #fff;
+  width: 40px;
+  height: 40px;
+}

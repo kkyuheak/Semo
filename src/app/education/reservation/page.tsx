@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import styles from "./reservation.module.css";
+import Calender from "@/components/Calender/Calender";
 
 const Reservation = () => {
   const { user } = useUserStore();
@@ -37,7 +38,7 @@ const Reservation = () => {
 
   useEffect(() => {
     getData();
-  });
+  }, []);
 
   return (
     <>
@@ -58,7 +59,9 @@ const Reservation = () => {
             </div>
             <div className={styles.main_right}>
               <p>{user.nickname}님 예약 날짜를 선택해주세요!</p>
-              <div className={styles.cal}></div>
+              <div className={styles.cal}>
+                <Calender />
+              </div>
             </div>
           </div>
         </div>

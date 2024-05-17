@@ -41,7 +41,7 @@
 .cal {
   width: 550px;
   height: 100vh;
-  background-color: brown;
+  background-color: rgb(255, 191, 191);
   margin: auto;
   margin-top: 20px;
 }
