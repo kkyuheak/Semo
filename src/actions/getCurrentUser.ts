@@ -8,6 +8,8 @@ export interface ICurrentUser {
   hashedPassword: string;
   createdAt?: Date;
   updatedAt?: Date;
+  eduReserve?: Number[];
+  eduReserveDate?: String[];
 }
 
 export default async function getCurrentUser() {

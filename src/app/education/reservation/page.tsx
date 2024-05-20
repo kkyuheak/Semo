@@ -7,12 +7,22 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import styles from "./reservation.module.css";
-import Calender from "@/components/Calender/Calender";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import dayjs from "dayjs";
+import axios from "axios";
+
+type DatePiece = Date | null;
+type SelectedDate = DatePiece | [DatePiece, DatePiece];
 
 const Reservation = () => {
   const { user } = useUserStore();
 
   const [eduData, setEduData] = useState<IEducation[]>([]);
+
+  const [date, setDate] = useState<SelectedDate>();
+
+  console.log(date);
 
   // searchParams 가져오기
   const searchParams = useSearchParams();
@@ -40,6 +50,17 @@ const Reservation = () => {
     getData();
   }, []);
 
+  const handleClick = async () => {
+    try {
+      const response = await axios.post("/api/reserve", {
+        eduId: Number(exhiNum),
+        reserveDate: dayjs(date?.toString()).format("YYYY년 MM월 DD일"),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       {eduData.length > 0 ? (
@@ -58,9 +79,28 @@ const Reservation = () => {
               <p>교육장소 : {eduData[0].EDU_PLACE}</p>
             </div>
             <div className={styles.main_right}>
-              <p>{user.nickname}님 예약 날짜를 선택해주세요!</p>
+              <p className={styles.main_right_title}>
+                {user.nickname}님 예약 날짜를 선택해주세요!
+              </p>
               <div className={styles.cal}>
-                <Calender />
+                <Calendar
+                  className={styles.calendar}
+                  calendarType="gregory"
+                  minDate={new Date(eduData[0].APP_OPEN)}
+                  maxDate={new Date(eduData[0].APP_CLOSE)}
+                  prev2Label={null}
+                  next2Label={null}
+                  onChange={setDate}
+                  value={date}
+                />
+              </div>
+              <div className={styles.checkDate}>
+                <p>{user.nickname}님 예약하신 날짜를 확인해주세요</p>
+                <p>{dayjs(date?.toString()).format("YYYY년 MM월 DD일")}</p>
+              </div>
+
+              <div className={styles.reserveBtn}>
+                <button onClick={handleClick}>예약 확정</button>
               </div>
             </div>
           </div>

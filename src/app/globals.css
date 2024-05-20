@@ -38,3 +38,27 @@ html {
 .swiper-button-prev {
   color: #000 !important;
 }
+
+/* react-calendar */
+
+.react-calendar__tile--now,
+.react-calendar__tile--active {
+  border-radius: 50%;
+}
+
+.react-calendar__tile {
+  width: 50px;
+  height: 50px;
+}
+
+.react-calendar__tile--active {
+  background-color: rgb(45, 186, 163) !important;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  font-size: 16px;
+}
+
+.react-calendar__month-view__weekdays__weekday > abbr {
+  text-decoration: none;
+}
