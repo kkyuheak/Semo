@@ -17,23 +17,12 @@ export default function NavBar({
   const { setUser, user, resetUser } = useUserStore();
   console.log("user:", user);
 
-  const [whiteNav, setWhiteNav] = useState<boolean>(false);
   const [hide, setHide] = useState<boolean>(true);
 
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
-    const height: number = document.getElementById("visit")?.offsetTop!;
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > height) {
-        setWhiteNav(true);
-      } else {
-        setWhiteNav(false);
-      }
-    });
-
     window.addEventListener("click", () => {
       setHide(true);
     });
@@ -100,11 +89,7 @@ export default function NavBar({
   // } else if (pathname !== "/") {
 
   return (
-    <div
-      className={
-        whiteNav ? `${styles.topNav} ${styles.whiteTop}` : `${styles.topNav}`
-      }
-    >
+    <div className={styles.topNav}>
       <div className={styles.topNavWrapper}>
         {/* topNav logo */}
         <div className={styles.topNavLogo}>

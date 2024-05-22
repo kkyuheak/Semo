@@ -59,6 +59,7 @@
   z-index: 10;
   padding: 3px 0px;
   transition: all 0.3s;
+  background-color: #fff;
 }
 
 .whiteTop {
